@@ -8,7 +8,7 @@ return [
     'smtp_host' => 'smtp-relay.brevo.com',
     'smtp_port' => 587,
     'smtp_username' => 'santiheras09@gmail.com',
-    'smtp_password' => 'w2FP0GnAddg',
+    'smtp_password' => 'w2FP0GnAvj1NfsSg',
     'smtp_encryption' => 'tls',
     'from_email' => 'santiheras09@gmail.com',
     'from_name' => 'Sales Management System',

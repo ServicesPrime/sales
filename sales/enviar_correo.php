@@ -29,6 +29,13 @@ $net_utility           = $_POST['Net_Utility'] ?? '';
 $commission_percentage = $_POST['Commission_Percentage'] ?? '';
 $commission_amount     = $_POST['Commission_Amount'] ?? '';
 
+$image_path = __DIR__ . '/Images/Facility.png'; // Ajusta la ruta según tu estructura
+if (file_exists($image_path)) {
+    $image_data = base64_encode(file_get_contents($image_path));
+    $image_src = 'data:image/png;base64,' . $image_data;
+} else {
+    $image_src = ''; // o una imagen por defecto
+}
 // ==============================
 // Generar contenido HTML del PDF
 // ==============================
@@ -60,8 +67,10 @@ ob_start();
 
     <!-- LOGO -->
     <div style="text-align:center; margin-bottom:15px;">
-        <img src="Images/Facility.png" style="width:240px;">
-    </div>
+    <?php if ($image_src): ?>
+        <img src="<?= $image_src ?>" style="width:240px;">
+    <?php endif; ?>
+</div>
 
     <!-- TITULO -->
     <h1 style="text-align:center; color:#a30000; margin:5px 0 0 0; font-size:26px;">
