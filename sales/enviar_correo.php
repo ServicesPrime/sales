@@ -29,13 +29,14 @@ $net_utility           = $_POST['Net_Utility'] ?? '';
 $commission_percentage = $_POST['Commission_Percentage'] ?? '';
 $commission_amount     = $_POST['Commission_Amount'] ?? '';
 
-$image_path = __DIR__ . '/Images/Facility.png'; // Ajusta la ruta según tu estructura
+$image_path = __DIR__ . '/Images/Facility.png';
 if (file_exists($image_path)) {
     $image_data = base64_encode(file_get_contents($image_path));
     $image_src = 'data:image/png;base64,' . $image_data;
 } else {
-    $image_src = ''; // o una imagen por defecto
+    $image_src = '';
 }
+
 // ==============================
 // Generar contenido HTML del PDF
 // ==============================
@@ -58,9 +59,10 @@ ob_start();
 <body style="font-family: Arial, sans-serif;">
 
 <div style="
-    width: 750px;
+    width: 90%;
+    max-width: 700px;
     margin: 0 auto;
-    padding: 40px 50px;
+    padding: 40px 40px;
     font-size: 14px;
     line-height: 1.55;
 ">
@@ -70,7 +72,7 @@ ob_start();
     <?php if ($image_src): ?>
         <img src="<?= $image_src ?>" style="width:240px;">
     <?php endif; ?>
-</div>
+    </div>
 
     <!-- TITULO -->
     <h1 style="text-align:center; color:#a30000; margin:5px 0 0 0; font-size:26px;">
@@ -129,7 +131,6 @@ ob_start();
         <li>The company reserves the right to adjust or deny commission if discrepancies are found.</li>
         <li>This document must match the Work Order records in the system.</li>
     </ul>
-
 
     <!-- SIGNATURE -->
     <div style="margin-top:50px; font-size:14px;">
@@ -268,7 +269,7 @@ if (file_exists($pdf_path)) {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #001f54 0%, #003d82 100%);
             font-family: 'Inter', sans-serif;
             padding: 50px;
             display: flex;
@@ -305,17 +306,17 @@ if (file_exists($pdf_path)) {
         .btn {
             display: inline-block;
             padding: 15px 40px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #001f54 0%, #003d82 100%);
             color: white;
             text-decoration: none;
             border-radius: 10px;
             font-weight: 600;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 4px 15px rgba(0, 31, 84, 0.4);
         }
         .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.5);
+            box-shadow: 0 6px 25px rgba(0, 31, 84, 0.5);
         }
         .details {
             background: #f9fafb;
