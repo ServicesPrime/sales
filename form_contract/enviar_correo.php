@@ -53,6 +53,8 @@ ob_start();
 <meta charset="UTF-8">
 <style>
   body { font-family: Arial, sans-serif; background-color:#fff; color:#333; }
+  .logo-container { text-align:center; margin-bottom:20px; }
+  .logo-container img { max-width:250px; height:auto; }
   h1 { text-align:center; color:#a30000; }
   .section { margin-top:20px; border-left:4px solid #a30000; padding-left:10px; }
   .section h2 { color:#a30000; font-size:18px; margin-bottom:10px; }
@@ -61,7 +63,10 @@ ob_start();
 </style>
 </head>
 <body>
-  <h1> Request Form - Prime Facility Services</h1>
+  <div class="logo-container">
+    <img src="<?php echo __DIR__ . '/Images/Facility.png'; ?>" alt="Prime Facility Services Logo">
+  </div>
+  <h1>Request Form - Prime Facility Services</h1>
 
   <div class="section">
     <h2>Section 1: Request Information</h2>
@@ -677,7 +682,7 @@ try {
         </div>
         <div class='footer'>
             <p>Submitted on " . date('F j, Y, g:i a') . "</p>
-            <p>Sales Management System</p>
+            <p>Prime Facility Services Group</p>
         </div>
     </body>
     </html>
@@ -721,7 +726,7 @@ if (file_exists($pdf_path)) {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #001f54 0%, #a30000 100%);
             font-family: 'Inter', sans-serif;
             padding: 50px;
             display: flex;
@@ -758,17 +763,17 @@ if (file_exists($pdf_path)) {
         .btn {
             display: inline-block;
             padding: 15px 40px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #001f54 0%, #a30000 100%);
             color: white;
             text-decoration: none;
             border-radius: 10px;
             font-weight: 600;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 4px 15px rgba(0, 31, 84, 0.4);
         }
         .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.5);
+            box-shadow: 0 6px 25px rgba(0, 31, 84, 0.5);
         }
         .details {
             background: #f9fafb;

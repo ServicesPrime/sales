@@ -13,7 +13,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #001f54 0%, #a30000 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -83,30 +83,40 @@
         }
 
         .btn-contract {
-            background: linear-gradient(135deg, #c70734 0%, #e91e63 100%);
+            background: linear-gradient(135deg, #a30000 0%, #c70734 100%);
             color: white;
-            box-shadow: 0 4px 15px rgba(199, 7, 52, 0.4);
+            box-shadow: 0 4px 15px rgba(163, 0, 0, 0.4);
         }
 
         .btn-contract:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(199, 7, 52, 0.5);
+            box-shadow: 0 6px 25px rgba(163, 0, 0, 0.5);
         }
 
         .btn-sales {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #001f54 0%, #003080 100%);
             color: white;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 4px 15px rgba(0, 31, 84, 0.4);
         }
 
         .btn-sales:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.5);
+            box-shadow: 0 6px 25px rgba(0, 31, 84, 0.5);
         }
 
         .icon {
             margin-right: 12px;
             font-size: 1.5rem;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-container img {
+            max-width: 200px;
+            height: auto;
         }
 
         .footer {
@@ -153,6 +163,9 @@
 </head>
 <body>
     <div class="container">
+        <div class="logo-container">
+            <img src="form_contract/Images/Facility.png" alt="Prime Facility Services Logo">
+        </div>
         <h1>Welcome</h1>
         <p class="subtitle">Select the application you want to access</p>
 
@@ -169,7 +182,7 @@
         </div>
 
         <div class="footer">
-            <p>&copy; <?php echo date('Y'); ?> - Sales Management System</p>
+            <p>&copy; <?php echo date('Y'); ?> - Prime Facility Services Group</p>
         </div>
     </div>
 </body>
