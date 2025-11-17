@@ -1,139 +1,176 @@
 <!DOCTYPE html>
 <html lang="es">
-<?php include 'header.php'; ?>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Menu - Sales & Form Management</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 60px 40px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+        }
+
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-contract {
+            background: linear-gradient(135deg, #c70734 0%, #e91e63 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(199, 7, 52, 0.4);
+        }
+
+        .btn-contract:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(199, 7, 52, 0.5);
+        }
+
+        .btn-sales {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-sales:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.5);
+        }
+
+        .icon {
+            margin-right: 12px;
+            font-size: 1.5rem;
+        }
+
+        .footer {
+            margin-top: 40px;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 25px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 18px 30px;
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Loading animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            animation: fadeIn 0.6s ease;
+        }
+    </style>
+</head>
 <body>
-  <div class="container">
+    <div class="container">
+        <h1>Welcome</h1>
+        <p class="subtitle">Select the application you want to access</p>
 
-<!-- 🔹 Encabezado -->
-<div class="form-header" id="formHeader"
-     style="text-align:center; margin-bottom:25px; padding:25px 0;
-            background-color:#a30000; border-radius:10px;">
-  <h2 style="font-size:26px; font-weight:700; color:white; margin:0;">
-    📋 Registration Form
-  </h2>
-</div>
+        <div class="buttons-container">
+            <a href="form_contract/" class="btn btn-contract">
+                <span class="icon">📄</span>
+                Form for Contract
+            </a>
 
-<!-- 🔹 Contenido -->
-<div class="form-content">
-  <form id="main_form" action="enviar_correo.php" method="POST">
-
-    <div class="section-title collapsible">Section 1: Request Information <span class="toggle-icon">▼</span></div>
-    <div class="section-content hidden"><?php include 'form_part1_request.php'; ?></div>
-
-
-    <!-- 🔹 Botón principal -->
-    <div class="form-actions" style="text-align:center; margin-top:25px;">
-      <button type="button" id="btnPreview"
-              style="padding:10px 25px; font-size:16px; font-weight:600;
-                     background:#a30000; color:white; border:none;
-                     border-radius:6px; cursor:pointer;">
-        📄 Guardar
-      </button>
-    </div>
-
-    <!-- 🪟 Modal de previsualización -->
-    <div id="previewModal" style="
-      display:none; position:fixed; top:0; left:0; width:100%; height:100%;
-      background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:9999;
-    ">
-      <div style="
-        background:white; padding:25px; border-radius:10px; max-width:800px; width:90%;
-        box-shadow:0 4px 20px rgba(0,0,0,0.3); overflow-y:auto; max-height:90vh;
-      ">
-        <h2 style="color:#a30000; margin-bottom:10px;">🧾 Previsualización del Formulario</h2>
-        <div id="previewContent" style="text-align:left; font-size:15px; line-height:1.5;"></div>
-        <div style="text-align:center; margin-top:20px;">
-          <button id="confirmSend" style="background:#007bff; color:white; padding:8px 18px; border:none; border-radius:6px;">✅ Confirmar y Guardar</button>
-          <button id="cancelPreview" style="background:#ccc; padding:8px 18px; border:none; border-radius:6px;">❌ Cancelar</button>
+            <a href="sales/" class="btn btn-sales">
+                <span class="icon">💼</span>
+                Sales
+            </a>
         </div>
-      </div>
+
+        <div class="footer">
+            <p>&copy; <?php echo date('Y'); ?> - Sales Management System</p>
+        </div>
     </div>
-
-  </form>
-</div>
-
-<style>
-.section-title {
-  background-color: #001f54;
-  color: white;
-  padding: 12px 16px;
-  font-size: 18px;
-  font-weight: bold;
-  border-radius: 8px;
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  user-select: none;
-  transition: background 0.3s ease;
-}
-.section-title:hover { background-color: #003080; }
-.toggle-icon { transition: transform 0.3s ease; }
-.section-title.collapsed .toggle-icon { transform: rotate(-90deg); }
-.section-content {
-  border: 1px solid #ccc;
-  border-top: none;
-  border-radius: 0 0 8px 8px;
-  padding: 15px;
-  background-color: #f9f9f9;
-}
-.section-content.hidden { display: none; }
-</style>
-
-<!-- ====================================================== -->
-<!-- Scripts -->
-<!-- ====================================================== -->
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  // 🔹 Comportamiento de secciones plegables
-  const sections = document.querySelectorAll(".section-title");
-  sections.forEach(section => {
-    const content = section.nextElementSibling;
-    content.classList.add("hidden");
-    section.classList.add("collapsed");
-    section.addEventListener("click", () => {
-      section.classList.toggle("collapsed");
-      content.classList.toggle("hidden");
-    });
-  });
-
-  // 🔹 Abrir previsualización
-  document.getElementById("btnPreview").addEventListener("click", () => {
-    const form = document.getElementById("main_form");
-    const data = new FormData(form);
-
-    let html = "<table style='width:100%; border-collapse:collapse;'>";
-    data.forEach((value, key) => {
-      if (value.trim() !== "")
-        html += `<tr>
-          <td style='font-weight:bold; padding:6px; border-bottom:1px solid #ddd;'>${key.replaceAll("_", " ")}</td>
-          <td style='padding:6px; border-bottom:1px solid #ddd;'>${value}</td>
-        </tr>`;
-    });
-    html += "</table>";
-
-    document.getElementById("previewContent").innerHTML = html;
-    document.getElementById("previewModal").style.display = "flex";
-  });
-
-  // 🔹 Cerrar modal
-  document.getElementById("cancelPreview").addEventListener("click", () => {
-    document.getElementById("previewModal").style.display = "none";
-  });
-
-  // 🔹 Confirmar envío
-  document.getElementById("confirmSend").addEventListener("click", () => {
-    document.getElementById("main_form").submit();
-  });
-});
-</script>
-
-<?php 
-  include 'scripts_request.php';             
-  include 'scripts_operativo.php';     
-  include 'scripts_economico.php';     
-?>
-
 </body>
 </html>
