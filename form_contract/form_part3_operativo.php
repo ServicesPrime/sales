@@ -16,12 +16,14 @@
 
 <!-- 13️⃣ Service Frequency -->
 <div class="question-block" id="q13">
-  <label for="Service_Frequency" class="question-label">13. Service Frequency</label>
+  <label class="question-label">13. Service Frequency</label>
 
   <div class="simple-frequency-inline">
-    <!-- 🔽 Selector de periodo -->
+
+    <!-- 🔹 13.1 PERIOD -->
     <div class="period-select">
-      <select id="period" name="period" class="period-dropdown">
+      <label class="sub-label">13.1 Period</label>
+      <select id="q13_1" name="period" class="period-dropdown">
         <option value="">-- Select Period --</option>
         <option value="one_time">One Time</option>
         <option value="two_weeks">Every 2 Weeks</option>
@@ -35,10 +37,10 @@
       </select>
     </div>
 
-    <!-- 📅 Bloque de días -->
+    <!-- 🔹 13.2 WEEKLY DAYS -->
     <div class="week-block">
-      <span class="week-title">Weekly</span>
-      <div class="days">
+      <label class="sub-label">13.2 Weekly Days</label>
+      <div class="days" id="q13_2">
         <label class="day-box"><input type="checkbox" name="week_days[]" value="1"><span>1</span></label>
         <label class="day-box"><input type="checkbox" name="week_days[]" value="2"><span>2</span></label>
         <label class="day-box"><input type="checkbox" name="week_days[]" value="3"><span>3</span></label>
@@ -46,12 +48,140 @@
         <label class="day-box"><input type="checkbox" name="week_days[]" value="5"><span>5</span></label>
         <label class="day-box"><input type="checkbox" name="week_days[]" value="6"><span>6</span></label>
         <label class="day-box"><input type="checkbox" name="week_days[]" value="7"><span>7</span></label>
-        <!-- ✅ Nueva opción independiente -->
-        <label class="day-box"><input type="checkbox" name="week_days[]" value="one_time"><span>One Time</span></label>
       </div>
     </div>
+
+    <!-- 🔹 13.3 ONE TIME -->
+    <div class="one-time-select">
+      <label class="sub-label">13.3 One Time</label>
+      <select id="q13_3" name="one_time">
+        <option value="">-- Select Option --</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+    </div>
+
+  </div>
+
+  <!-- 🔹 13.4 Exact Days (solo para One Time = YES) -->
+  <div class="exact-days-block" id="exactDaysBlock" style="display:none; margin-top:10px;">
+    <label class="sub-label">13.4 Exact Days</label>
+    <input type="number" id="q13_4" name="exact_days" min="1" value=""
+           placeholder="Enter exact days"
+           style="width:120px; padding:6px; border:1px solid #ccc; border-radius:6px;">
+  </div>
+
+  <!-- 🔹 13.5 Total Service Days -->
+  <div style="margin-top:10px;">
+    <label class="sub-label">13.5 Total Service Days</label>
+    <input type="text" id="totalServiceDays" name="total_service_days" 
+           readonly 
+           style="width:140px; padding:6px; font-weight:bold; border:1px solid #999; border-radius:6px;">
   </div>
 </div>
+
+<style>
+  .sub-label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  .days {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 6px;
+  }
+
+  .day-box {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #f0f0f0;
+    padding: 6px 10px;
+    border-radius: 6px;
+  }
+</style>
+
+<script>
+  // Tabla de equivalencias del periodo → días reales
+  const periodDays = {
+    "one_time": 1,
+    "two_weeks": 14,
+    "three_weeks": 21,
+    "monthly": 30,
+    "bimonthly": 60,
+    "quarterly": 90,
+    "four_months": 120,
+    "semiannual": 182,
+    "annual": 365
+  };
+
+  const periodSelect = document.getElementById("q13_1");
+  const oneTimeSelect = document.getElementById("q13_3");
+  const exactDaysBlock = document.getElementById("exactDaysBlock");
+  const exactDaysInput = document.getElementById("q13_4");
+  const totalDaysOutput = document.getElementById("totalServiceDays");
+
+  function getWeeklyDaysCount() {
+    return document.querySelectorAll('#q13_2 input[type="checkbox"]:checked').length;
+  }
+
+  oneTimeSelect.addEventListener("change", function () {
+    if (oneTimeSelect.value === "yes") {
+      exactDaysBlock.style.display = "block";
+    } else {
+      exactDaysBlock.style.display = "none";
+      exactDaysInput.value = "";
+    }
+    calculateServiceDays();
+  });
+
+  function enforceMaxExactDays() {
+    const selectedPeriod = periodSelect.value;
+    const maxDays = periodDays[selectedPeriod] || 0;
+    let val = parseInt(exactDaysInput.value);
+
+    if (val > maxDays) {
+      exactDaysInput.value = maxDays;
+    }
+  }
+
+  function calculateServiceDays() {
+    const selectedPeriod = periodSelect.value;
+    const periodTotalDays = periodDays[selectedPeriod] || 0;
+
+    let totalDays = 0;
+
+    // Caso ONE TIME = YES
+    if (oneTimeSelect.value === "yes") {
+      enforceMaxExactDays();
+      totalDays = parseInt(exactDaysInput.value) || 0;
+    } 
+    else {
+      const weeklyDays = getWeeklyDaysCount();
+      totalDays = Math.round((weeklyDays / 7) * periodTotalDays);
+    }
+
+    totalDaysOutput.value = totalDays;
+  }
+
+  periodSelect.addEventListener("change", calculateServiceDays);
+
+  exactDaysInput.addEventListener("input", () => {
+    enforceMaxExactDays();
+    calculateServiceDays();
+  });
+
+  document.querySelectorAll('#q13_2 input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener("change", calculateServiceDays);
+  });
+
+  calculateServiceDays();
+</script>
+
 
 <!-- 14️⃣ Invoice Frequency -->
 <div class="question-block" id="q14">

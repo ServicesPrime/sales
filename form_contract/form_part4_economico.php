@@ -16,406 +16,507 @@
   <input type="text" name="Prime_Quoted_Price" id="Prime_Quoted_Price" placeholder="Enter Prime quoted price">
 </div>
 
-<!-- 18️⃣ Include Hood Vent Cleaning -->
+<!-- 18️⃣ JANITORIAL SERVICES -->
 <div class="question-block" id="q18">
-  <label for="includeHoodVent" id="hoodVentLabel" class="question-label">
-    18. Include Hood Vent Cleaning?
+  <label for="includeJanitorial" class="question-label">
+    18. Janitorial Services
   </label>
-  <select id="includeHoodVent" name="includeHoodVent" onchange="toggleHoodVentTables()">
+
+  <select id="includeJanitorial" name="includeJanitorial" onchange="toggleSection18()">
     <option value="">-- Select an option --</option>
     <option value="No">No</option>
     <option value="Yes">Yes</option>
   </select>
 
-  <div id="hoodVentTablesContainer" style="display:none; margin-top:10px;"></div>
+  <div id="section18Container" style="display:none; margin-top:20px;">
 
-  <div style="margin-top:10px;">
-    <button type="button" id="addKitchenBtn" onclick="addKitchenTable()" style="
-      display:none;
-      padding:6px 14px;
-      background-color:#c00;
-      color:white;
-      border:none;
-      border-radius:6px;
-      cursor:pointer;
-      margin-right:10px;">
-      ➕ Add Kitchen
-    </button>
+    <!-- ADD / REMOVE -->
+    <div style="margin-bottom:15px;">
+      <button type="button" class="btn18 addRow18" onclick="addRow18()">➕ Add Row</button>
+      <button type="button" class="btn18 removeRow18" onclick="removeRow18()">🗑 Remove</button>
+    </div>
+
+    <!-- TABLE -->
+    <table class="service-table18">
+      <thead>
+        <tr>
+          <th>Type of Services</th>
+          <th>Service Time</th>
+          <th>Frequency</th>
+          <th>Service Description</th>
+          <th>SUBTOTAL</th>
+        </tr>
+      </thead>
+
+      <tbody id="table18body">
+
+        <!-- ONLY ONE INITIAL ROW -->
+        <tr>
+
+          <!-- TYPE OF SERVICES (WITH WRITE...) -->
+          <td>
+            <select class="type18" onchange="toggleWriteOption18(this)">
+              <option value="__write__">✍️ Write...</option>
+              <option value="">-- Select Service --</option>
+
+              <!-- JANITORIAL OPTIONS -->
+              <option>Window Cleaning</option>
+              <option>Window Tint</option>
+              <option>Carpet Cleaning</option>
+              <option>Painting</option>
+              <option>Powerwashing Facade</option>
+              <option>Furniture Upholstery Cleaning</option>
+              <option>Restroom Cleaning</option>
+            </select>
+
+            <input type="text" class="write-field-18" style="display:none; margin-top:5px;" placeholder="Write service...">
+          </td>
+
+          <!-- SERVICE TIME -->
+          <td>
+            <select class="time18">
+              <option value="">-- Select Time --</option>
+              <option>1 Day</option>
+              <option>1-2 Days</option>
+              <option>3 Days</option>
+              <option>4 Days</option>
+              <option>5 Days</option>
+              <option>6 Days</option>
+              <option>7 Days</option>
+            </select>
+          </td>
+
+          <!-- FREQUENCY -->
+          <td>
+            <select class="freq18">
+              <option value="">-- Select Period --</option>
+              <option>One Time</option>
+              <option>Every 2 Weeks</option>
+              <option>Every 3 Weeks</option>
+              <option>Monthly</option>
+              <option>Bimonthly</option>
+              <option>Quarterly</option>
+              <option>Every 4 Months</option>
+              <option>Semiannual</option>
+              <option>Annual</option>
+            </select>
+          </td>
+
+          <!-- DESCRIPTION (FREE INPUT) -->
+          <td>
+            <input type="text" class="desc18" placeholder="Write description...">
+          </td>
+
+          <!-- SUBTOTAL (FREE INPUT) -->
+          <td>
+            <input type="number" step="0.01" class="subtotal18" placeholder="0.00" oninput="calcTotals18()">
+          </td>
+
+        </tr>
+
+      </tbody>
+    </table>
+
+    <!-- TOTAL BOXES -->
+    <div class="totals18-container">
+
+      <div class="tot-box-18">
+        <div class="tot-header-18">TOTAL</div>
+        <input type="text" id="total18" readonly>
+      </div>
+
+      <div class="tot-box-18">
+        <div class="tot-header-18">TAXES (8.25%)</div>
+        <input type="text" id="taxes18" readonly>
+      </div>
+
+      <div class="tot-box-18">
+        <div class="tot-header-18">GRAND TOTAL</div>
+        <input type="text" id="grand18" readonly>
+      </div>
+
+    </div>
+
   </div>
 </div>
 
 <style>
-  .kitchen-block {
-    border-top: 3px solid #c00;
-    border-radius: 8px;
-    margin-top: 15px;
-    overflow: hidden;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  }
-
-  .kitchen-header {
-    background-color: #c00;
-    color: #fff;
-    padding: 10px 15px;
-    font-weight: bold;
-    text-transform: uppercase;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .kitchen-header:hover {
-    background-color: #a00000;
-  }
-
-  .toggle-icon {
-    font-weight: bold;
-    font-size: 18px;
-    transition: transform 0.3s ease;
-  }
-
-  .expanded .toggle-icon {
-    transform: rotate(180deg);
-  }
-
-  .kitchen-content {
-    display: none;
-    background-color: #fff;
-    padding: 10px;
-  }
-
-  .expanded .kitchen-content {
-    display: block;
-  }
-
-  .kitchen-table {
+  .service-table18 {
     width: 100%;
     border-collapse: collapse;
-    text-align: center;
+    margin-top: 20px;
     font-size: 14px;
-    table-layout: fixed;
   }
 
-  .kitchen-table th {
+  .service-table18 th {
     background-color: #c00;
     color: #fff;
-    padding: 6px;
+    padding: 8px;
+    text-align: center;
   }
 
-  .kitchen-table td {
-    padding: 6px;
-    border-top: 1px solid #ddd;
+  .service-table18 td {
+    border: 1px solid #ddd;
+    padding: 8px;
   }
 
-  .amount, .total {
+  .service-table18 select,
+  .service-table18 input {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .btn18 {
+    padding: 6px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
     font-weight: bold;
+    margin-right: 10px;
+  }
+
+  .addRow18 { background-color:#008c4a; color:white; }
+  .removeRow18 { background-color:#777; color:white; }
+
+  .totals18-container {
+    margin-top: 25px;
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+  }
+
+  .tot-box-18 {
+    width: 220px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background:white;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  .tot-header-18 {
+    background-color:#c00;
+    color:white;
+    padding:8px;
+    text-align:center;
+    font-weight:bold;
+  }
+
+  .tot-box-18 input {
+    width:100%;
+    padding:10px;
+    text-align:right;
+    font-weight:bold;
+    background:#f7f7f7;
+    border:none;
   }
 </style>
 
 <script>
-let kitchenCount = 0;
+// SHOW/HIDE SECTION
+function toggleSection18() {
+  document.getElementById("section18Container").style.display =
+    document.getElementById("includeJanitorial").value === "Yes"
+    ? "block" : "none";
+}
 
-function toggleHoodVentTables() {
-  const select = document.getElementById("includeHoodVent");
-  const container = document.getElementById("hoodVentTablesContainer");
-  const addBtn = document.getElementById("addKitchenBtn");
+// WRITE OPTION
+function toggleWriteOption18(select) {
+  const input = select.parentElement.querySelector('.write-field-18');
+  input.style.display = (select.value === "__write__") ? "block" : "none";
+}
 
-  if (select.value === "Yes") {
-    container.style.display = "block";
-    addBtn.style.display = "inline-block";
-    if (container.childElementCount === 0) addKitchenTable();
+// ADD ROW
+function addRow18() {
+  const tbody = document.getElementById("table18body");
+  const newRow = tbody.children[0].cloneNode(true);
+
+  newRow.querySelectorAll("select, input").forEach(el => el.value = "");
+  newRow.querySelector('.write-field-18').style.display = "none";
+
+  tbody.appendChild(newRow);
+}
+
+// REMOVE ROW
+function removeRow18() {
+  const tbody = document.getElementById("table18body");
+  if (tbody.children.length > 1) {
+    tbody.lastElementChild.remove();
+    calcTotals18();
   } else {
-    container.innerHTML = "";
-    container.style.display = "none";
-    addBtn.style.display = "none";
-    kitchenCount = 0;
+    alert("At least one row must remain.");
   }
 }
 
-function addKitchenTable() {
-  kitchenCount++;
-  const container = document.getElementById("hoodVentTablesContainer");
-
-  const kitchenName =
-    kitchenCount === 1 ? "Main Kitchen" :
-    kitchenCount === 2 ? "Pool Kitchen" :
-    kitchenCount === 3 ? "Third Kitchen" :
-    "Kitchen " + kitchenCount;
-
-  const kitchenBlock = document.createElement("div");
-  kitchenBlock.classList.add("kitchen-block");
-  kitchenBlock.innerHTML = `
-    <div class="kitchen-header" onclick="this.parentElement.classList.toggle('expanded')">
-      ${kitchenName}
-      <span class="toggle-icon">▼</span>
-    </div>
-    <div class="kitchen-content">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-        <div>
-          <label style="font-weight:bold; margin-right:8px;">Kitchen Name:</label>
-          <input type="text" name="kitchen_name_${kitchenCount}" placeholder="${kitchenName}" 
-                 style="width:250px; border:1px solid #ccc; padding:6px; border-radius:6px;">
-        </div>
-        <div>
-          <button type="button" onclick="addServiceRow(this)" style="
-            background-color:#008c4a;
-            color:white;
-            border:none;
-            padding:5px 10px;
-            border-radius:4px;
-            margin-right:8px;
-            cursor:pointer;">➕ Add Row</button>
-          <button type="button" onclick="removeKitchenTable(this)" style="
-            background-color:#777;
-            color:white;
-            border:none;
-            padding:5px 10px;
-            border-radius:4px;
-            cursor:pointer;">🗑 Remove</button>
-        </div>
-      </div>
-
-      <table class="kitchen-table">
-        <thead>
-          <tr>
-            <th>Services</th>
-            <th>Qty</th>
-            <th>Unit Amount</th>
-            <th>Amount</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><input type="text" name="service_${kitchenCount}_1" value="Hood Cleaning" readonly></td>
-            <td><input type="number" name="qty_${kitchenCount}_1" value="0" min="0" oninput="updateAmount(this)"></td>
-            <td><input type="number" name="unit_${kitchenCount}_1" value="850" min="0" oninput="updateAmount(this)"></td>
-            <td><input type="text" class="amount" name="amount_${kitchenCount}_1" readonly></td>
-          </tr>
-          <tr>
-            <td><input type="text" name="service_${kitchenCount}_2" value="Access Panel Cleaning" readonly></td>
-            <td><input type="number" name="qty_${kitchenCount}_2" value="0" min="0" oninput="updateAmount(this)"></td>
-            <td><input type="number" name="unit_${kitchenCount}_2" value="350" min="0" oninput="updateAmount(this)"></td>
-            <td><input type="text" class="amount" name="amount_${kitchenCount}_2" readonly></td>
-          </tr>
-          <tr>
-            <td><input type="text" name="service_${kitchenCount}_3" value="PCU Filter Replacement" readonly></td>
-            <td><input type="number" name="qty_${kitchenCount}_3" value="0" min="0" oninput="updateAmount(this)"></td>
-            <td><input type="number" name="unit_${kitchenCount}_3" value="1000" min="0" oninput="updateAmount(this)"></td>
-            <td><input type="text" class="amount" name="amount_${kitchenCount}_3" readonly></td>
-          </tr>
-          <tr>
-            <td><input type="text" name="service_${kitchenCount}_4" placeholder="Add custom service..."></td>
-            <td><input type="number" name="qty_${kitchenCount}_4" value="0" min="0" oninput="updateAmount(this)"></td>
-            <td><input type="number" name="unit_${kitchenCount}_4" value="0" min="0" oninput="updateAmount(this)"></td>
-            <td><input type="text" class="amount" name="amount_${kitchenCount}_4" readonly></td>
-          </tr>
-          <tr style="background-color:#f5f5f5;">
-            <td colspan="3" style="text-align:right; font-weight:bold;">TOTAL</td>
-            <td><input type="text" class="total" name="total_${kitchenCount}" readonly></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  `;
-  container.appendChild(kitchenBlock);
-}
-
-function addServiceRow(button) {
-  const table = button.closest(".kitchen-content").querySelector("table");
-  const tbody = table.querySelector("tbody");
-  const newRow = document.createElement("tr");
-  newRow.innerHTML = `
-    <td><input type="text" placeholder="New service..."></td>
-    <td><input type="number" value="0" min="0" oninput="updateAmount(this)"></td>
-    <td><input type="number" value="0" min="0" oninput="updateAmount(this)"></td>
-    <td><input type="text" class="amount" readonly></td>`;
-  const totalRow = tbody.querySelector("tr:last-child");
-  tbody.insertBefore(newRow, totalRow);
-}
-
-function removeKitchenTable(button) {
-  const kitchenBlock = button.closest(".kitchen-block");
-  if (kitchenBlock && confirm("Remove this kitchen section?")) {
-    kitchenBlock.remove();
-  }
-}
-
-function updateAmount(input) {
-  const row = input.closest("tr");
-  const qty = parseFloat(row.querySelectorAll("input")[1].value) || 0;
-  const unit = parseFloat(row.querySelectorAll("input")[2].value) || 0;
-  const amount = row.querySelector(".amount");
-  amount.value = "$" + (qty * unit).toFixed(2);
-  recalcTableTotal(row.closest("table"));
-}
-
-function recalcTableTotal(table) {
+// CALCULATE TOTALS
+function calcTotals18() {
   let total = 0;
-  table.querySelectorAll(".amount").forEach(a => {
-    const val = parseFloat(a.value.replace("$", "")) || 0;
-    total += val;
+
+  document.querySelectorAll(".subtotal18").forEach(input => {
+    const val = parseFloat(input.value);
+    if (!isNaN(val)) total += val;
   });
-  table.querySelector(".total").value = "$" + total.toFixed(2);
+
+  document.getElementById("total18").value = "$" + total.toFixed(2);
+
+  const taxes = total * 0.0825;
+  document.getElementById("taxes18").value = "$" + taxes.toFixed(2);
+
+  document.getElementById("grand18").value = "$" + (total + taxes).toFixed(2);
 }
 </script>
 
 
-<!-- 19️⃣ Include Kitchen Equipment Section -->
+<!-- 19️⃣ Hoodvent & Kitchen Cleaning -->
 <div class="question-block" id="q19">
   <label for="includeKitchen" class="question-label">
-    19. Include Kitchen Equipment?
+    19. Hoodvent & Kitchen Cleaning
   </label>
 
-  <select id="includeKitchen" name="includeKitchen" onchange="toggleKitchenTables()">
+  <select id="includeKitchen" name="includeKitchen" onchange="toggleSection19()">
     <option value="">-- Select an option --</option>
     <option value="No">No</option>
     <option value="Yes">Yes</option>
   </select>
 
-  <div id="kitchenTablesContainer" style="display:none; margin-top: 10px;"></div>
+  <div id="section19Container" style="display:none; margin-top:20px;">
+
+    <!-- ADD / REMOVE -->
+    <div style="margin-bottom:15px;">
+      <button type="button" class="btn19 addRow19" onclick="addRow19()">➕ Add Row</button>
+      <button type="button" class="btn19 removeRow19" onclick="removeRow19()">🗑 Remove</button>
+    </div>
+
+    <!-- TABLE -->
+    <table class="service-table19">
+      <thead>
+        <tr>
+          <th>Type of Services</th>
+          <th>Service Time</th>
+          <th>Frequency</th>
+          <th>Service Description</th>
+          <th>SUBTOTAL</th>
+        </tr>
+      </thead>
+
+      <tbody id="table19body">
+
+        <!-- ONLY ONE INITIAL ROW -->
+        <tr>
+
+          <!-- TYPE OF SERVICES (WITH WRITE...) -->
+          <td>
+            <select class="type19" onchange="toggleWriteOption(this)">
+              <option value="__write__">✍️ Write...</option>
+              <option value="">-- Select Service --</option>
+              <option>Kitchen Cleaning</option>
+              <option>Vent Hood</option>
+              <option>Bar Cleaning</option>
+              <option>Grease Trap Cleaning</option>
+              <option>Restroom Cleaning</option>
+              <option>Dinning Room Cleaning</option>
+            </select>
+
+            <input type="text" class="write-field" style="display:none; margin-top:5px;" placeholder="Write service...">
+          </td>
+
+          <!-- SERVICE TIME -->
+          <td>
+            <select class="time19">
+              <option value="">-- Select Time --</option>
+              <option>1 Day</option>
+              <option>1-2 Days</option>
+              <option>3 Days</option>
+              <option>4 Days</option>
+              <option>5 Days</option>
+              <option>6 Days</option>
+              <option>7 Days</option>
+            </select>
+          </td>
+
+          <!-- FREQUENCY -->
+          <td>
+            <select class="freq19">
+              <option value="">-- Select Period --</option>
+              <option>One Time</option>
+              <option>Every 2 Weeks</option>
+              <option>Every 3 Weeks</option>
+              <option>Monthly</option>
+              <option>Bimonthly</option>
+              <option>Quarterly</option>
+              <option>Every 4 Months</option>
+              <option>Semiannual</option>
+              <option>Annual</option>
+            </select>
+          </td>
+
+          <!-- DESCRIPTION (FREE INPUT) -->
+          <td>
+            <input type="text" class="desc19" placeholder="Write description...">
+          </td>
+
+          <!-- SUBTOTAL (FREE INPUT) -->
+          <td>
+            <input type="number" step="0.01" class="subtotal19" placeholder="0.00" oninput="calcTotals19()">
+          </td>
+
+        </tr>
+
+      </tbody>
+    </table>
+
+    <!-- TOTAL BOXES -->
+    <div class="totals19-container">
+
+      <div class="tot-box">
+        <div class="tot-header">TOTAL</div>
+        <input type="text" id="total19" readonly>
+      </div>
+
+      <div class="tot-box">
+        <div class="tot-header">TAXES (8.25%)</div>
+        <input type="text" id="taxes19" readonly>
+      </div>
+
+      <div class="tot-box">
+        <div class="tot-header">GRAND TOTAL</div>
+        <input type="text" id="grand19" readonly>
+      </div>
+
+    </div>
+
+  </div>
 </div>
 
 <style>
-  .kitchen-category {
-    margin-top: 20px;
-    border-top: 3px solid #c00;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  }
-
-  .kitchen-header {
-    background-color: #c00;
-    color: white;
-    padding: 10px 15px;
-    font-size: 15px;
-    font-weight: bold;
-    text-transform: uppercase;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-  }
-
-  .kitchen-header:hover {
-    background-color: #a00000;
-  }
-
-  .toggle-icon {
-    font-weight: bold;
-    font-size: 18px;
-    transition: transform 0.3s ease;
-  }
-
-  .kitchen-table {
+  .service-table19 {
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 0 5px;
+    border-collapse: collapse;
+    margin-top: 20px;
     font-size: 14px;
-    display: none;
-    background-color: #fff;
   }
 
-  .kitchen-table th {
+  .service-table19 th {
     background-color: #c00;
-    color: white;
-    padding: 6px;
-    text-align: center;
-  }
-
-  .kitchen-table td {
+    color: #fff;
     padding: 8px;
     text-align: center;
   }
 
-  .expanded .kitchen-table {
-    display: table;
+  .service-table19 td {
+    border: 1px solid #ddd;
+    padding: 8px;
   }
 
-  .expanded .toggle-icon {
-    transform: rotate(180deg);
+  .service-table19 select,
+  .service-table19 input {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
   }
 
-  .surface-check {
-    transform: scale(1.3);
+  .btn19 {
+    padding: 6px 14px;
+    border: none;
+    border-radius: 6px;
     cursor: pointer;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+
+  .addRow19 { background-color:#008c4a; color:white; }
+  .removeRow19 { background-color:#777; color:white; }
+
+  .totals19-container {
+    margin-top: 25px;
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+  }
+
+  .tot-box {
+    width: 220px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background:white;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  .tot-header {
+    background-color:#c00;
+    color:white;
+    padding:8px;
+    text-align:center;
+    font-weight:bold;
+  }
+
+  .tot-box input {
+    width:100%;
+    padding:10px;
+    text-align:right;
+    font-weight:bold;
+    background:#f7f7f7;
+    border:none;
   }
 </style>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const container = document.getElementById("kitchenTablesContainer");
+function toggleSection19() {
+  document.getElementById("section19Container").style.display =
+    document.getElementById("includeKitchen").value === "Yes"
+    ? "block" : "none";
+}
 
-  window.toggleKitchenTables = function () {
-    const select = document.getElementById("includeKitchen");
-    if (select.value === "Yes") {
-      container.style.display = "block";
-      if (container.childElementCount === 0) loadKitchenSections();
-    } else {
-      container.innerHTML = "";
-      container.style.display = "none";
-    }
-  };
+function toggleWriteOption(select) {
+  const input = select.parentElement.querySelector('.write-field');
 
-  function loadKitchenSections() {
-    container.innerHTML = `
-      ${createCategory("TOTAL SURFACE", `
-        <table class="kitchen-table">
-          <thead><tr><th>Area</th><th>Square Feet</th></tr></thead>
-          <tbody><tr><td>Total Surface</td><td><input type="number" step="1" name="total_surface" placeholder="0"></td></tr></tbody>
-        </table>
-        <table class="kitchen-table" style="margin-top:10px;">
-          <thead><tr><th>Surface Element</th><th>Include</th></tr></thead>
-          <tbody>
-            <tr><td style="text-align:left;">Floor (Piso)</td><td><input type="checkbox" name="include_floor" class="surface-check"></td></tr>
-            <tr><td style="text-align:left;">Wall (Pared)</td><td><input type="checkbox" name="include_wall" class="surface-check"></td></tr>
-            <tr><td style="text-align:left;">Ceiling (Techo)</td><td><input type="checkbox" name="include_ceiling" class="surface-check"></td></tr>
-          </tbody>
-        </table>
-      `)}
-
-      ${createCategory("HEAT", createRows(["Stoves","Ovens","Fryers","Griddle / Grill","Salamander / Broiler"]))}
-      ${createCategory("COLD", createRows(["Refrigerators","Freezers","Beverage Coolers"]))}
-      ${createCategory("PREPARATION", createRows(["Food Processors","Industrial Blenders","Mixers","Cutters / Slicers"]))}
-      ${createCategory("SERVICE", createRows(["Hot Tables","Service Carts","Food Warmers (Bain-Marie)"]))}
-      ${createCategory("WASHING", createRows(["Industrial Dishwashers","Grease Traps (external cleaning only)","Sinks and Wash Stations"]))}
-      ${createCategory("ELECTRONIC EXTRAS", createRows(["Touch Screens","Speakers","Electronic Controls","Digital Clocks / Order Systems"]))}
-    `;
+  if (select.value === "__write__") {
+    input.style.display = "block";
+    input.value = "";
+  } else {
+    input.style.display = "none";
   }
+}
 
-  function createCategory(title, tableHTML) {
-    return `
-      <div class="kitchen-category">
-        <div class="kitchen-header" onclick="this.parentElement.classList.toggle('expanded')">
-          ${title}
-          <span class="toggle-icon">▼</span>
-        </div>
-        ${tableHTML}
-      </div>
-    `;
-  }
+function addRow19() {
+  const tbody = document.getElementById("table19body");
+  const newRow = tbody.children[0].cloneNode(true);
 
-  function createRows(items) {
-    return `
-      <table class="kitchen-table">
-        <thead><tr><th>Equipment</th><th>Quantity</th></tr></thead>
-        <tbody>
-          ${items.map(item => {
-            const slug = slugify(item);
-            return `<tr><td>${item}</td><td><input type="number" name="qty_${slug}" min="0" step="1" placeholder="0"></td></tr>`;
-          }).join("")}
-        </tbody>
-      </table>
-    `;
-  }
+  // Reset all inputs and selects in the cloned row
+  newRow.querySelectorAll("select, input").forEach(el => el.value = "");
+  newRow.querySelector('.write-field').style.display = "none";
 
-  function slugify(text) {
-    return text.toLowerCase().replace(/[’']/g, "").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
+  tbody.appendChild(newRow);
+}
+
+function removeRow19() {
+  const tbody = document.getElementById("table19body");
+  if (tbody.children.length > 1) {
+    tbody.lastElementChild.remove();
+    calcTotals19();
+  } else {
+    alert("At least one row must remain.");
   }
-});
+}
+
+function calcTotals19() {
+  let total = 0;
+
+  document.querySelectorAll(".subtotal19").forEach(input => {
+    const val = parseFloat(input.value);
+    if (!isNaN(val)) total += val;
+  });
+
+  document.getElementById("total19").value = "$" + total.toFixed(2);
+
+  const taxes = total * 0.0825;
+  document.getElementById("taxes19").value = "$" + taxes.toFixed(2);
+
+  document.getElementById("grand19").value = "$" + (total + taxes).toFixed(2);
+}
 </script>
-
 
 
 <!-- 20️⃣ Include Staff Section -->
