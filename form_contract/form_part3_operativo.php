@@ -168,7 +168,28 @@
     totalDaysOutput.value = totalDays;
   }
 
-  periodSelect.addEventListener("change", calculateServiceDays);
+  periodSelect.addEventListener("change", function() {
+    // Si se selecciona "One Time" en el Period
+    if (periodSelect.value === "one_time") {
+      // Auto-seleccionar One Time = Yes
+      oneTimeSelect.value = "yes";
+
+      // Mostrar el bloque de Exact Days
+      exactDaysBlock.style.display = "block";
+
+      // Establecer Exact Days a 1 por defecto
+      exactDaysInput.value = "1";
+
+      // Auto-seleccionar el día 1 en Weekly Days
+      const checkbox1 = document.querySelector('#q13_2 input[value="1"]');
+      if (checkbox1) {
+        checkbox1.checked = true;
+      }
+    }
+
+    // Recalcular siempre que cambie el periodo
+    calculateServiceDays();
+  });
 
   exactDaysInput.addEventListener("input", () => {
     enforceMaxExactDays();
