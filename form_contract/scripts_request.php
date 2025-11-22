@@ -8,7 +8,7 @@
 // =========================
 const formConfig = {
   requestTypeOptions: [
-    { category: "Janitorial",  requestTypes: ["Contract", "Proposal"] },
+    { category: "Janitorial",  requestTypes: ["Contract", "Proposal", "JWO"] },
     { category: "Hospitality", requestTypes: ["Quote", "Contract", "Proposal", "Kitchen & Hoodvent JWO"] },
   ],
 
