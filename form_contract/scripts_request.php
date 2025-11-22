@@ -159,6 +159,33 @@ function toggleSiteVisitField() {
 }
 
 // ===========================================================
+// 🔹 Lógica condicional para preguntas 18, 19 y 20
+// ===========================================================
+function applyConditionalLogic() {
+  const serviceType = document.getElementById("Service_Type")?.value;
+  const requestedService = normalize(document.getElementById("Requested_Service")?.value);
+
+  // Lógica para Q18 y Q19 basada en Service Type (Q1)
+  if (serviceType === "Hospitality") {
+    // Cuando es Hospitality: desactivar Q18, activar Q19
+    hideField(18);
+    showField(19);
+  } else if (serviceType === "Janitorial") {
+    // Cuando es Janitorial: desactivar Q19, activar Q18
+    hideField(19);
+    showField(18);
+  }
+
+  // Lógica para Q20 basada en Requested Service (Q4)
+  // Q20 solo se activa cuando Q4 es "Staff"
+  if (requestedService === "staff") {
+    showField(20);
+  } else {
+    hideField(20);
+  }
+}
+
+// ===========================================================
 // 🔹 Evaluación de reglas (motor principal)
 // ===========================================================
 function evaluateRules() {
@@ -185,6 +212,9 @@ function evaluateRules() {
 
   // Condición global: ocultar P15 si P2 = Quote o Kitchen & Hoodvent JWO
   if (reqType === "quote" || reqType === "kitchen & hoodvent jwo") hideField(15);
+
+  // Aplicar lógica condicional para Q18, Q19 y Q20 (esto sobrescribe las reglas anteriores)
+  applyConditionalLogic();
 }
 
 // ===========================================================
