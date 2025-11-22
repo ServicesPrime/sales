@@ -13,28 +13,34 @@ const formConfig = {
   ],
 
   // === Reglas dinámicas (type + service)
+  // Reglas de habilitación:
+  // - P1 = Janitorial → habilitar P18 (ocultar P19, P20)
+  // - P1 = Hospitality → habilitar P19 (ocultar P18, P20)
+  // - P4 = Staff → habilitar P20 (ocultar P18, P19)
+  // - P2 = Contract → habilitar P21, P22, P23, P24
+  // - P2 ≠ Contract → ocultar P21, P22, P23, P24
 formConditions: [
     // === HOSPITALITY: QUOTE ===
     { type: "Quote", service: "Kitchen Cleaning",               hide: [18,20,21,22,23,24,28] },
-    { type: "Quote", service: "Hood Vent",                      hide: [19,20,21,22,23,24,28] },
-    { type: "Quote", service: "Kitchen Cleaning & Hood Vent",   hide: [20,21,22,23,24,28] },
+    { type: "Quote", service: "Hood Vent",                      hide: [18,20,21,22,23,24,28] },
+    { type: "Quote", service: "Kitchen Cleaning & Hood Vent",   hide: [18,20,21,22,23,24,28] },
 
     // === HOSPITALITY: CONTRACT ===
     { type: "Contract", service: "Kitchen Cleaning",            hide: [12,18,20,25] },
-    { type: "Contract", service: "Hood Vent",                   hide: [12,19,20,25] },
-    { type: "Contract", service: "Kitchen Cleaning & Hood Vent",hide: [12,25] },
+    { type: "Contract", service: "Hood Vent",                   hide: [12,18,20,25] },
+    { type: "Contract", service: "Kitchen Cleaning & Hood Vent",hide: [12,18,25] },
     { type: "Contract", service: "Staff",                       hide: [12,16,17,18,19,25] },
 
     // === HOSPITALITY: PROPOSAL ===
-    { type: "Proposal", service: "Kitchen Cleaning",            hide: [12,18,21,20,23,24,25,29] },
-    { type: "Proposal", service: "Hood Vent",                   hide: [12,19,20,22,23,24,25,29] },
-    { type: "Proposal", service: "Kitchen Cleaning & Hood Vent",hide: [12,21,22,23,24,25,29] },
+    { type: "Proposal", service: "Kitchen Cleaning",            hide: [12,18,20,21,22,23,24,25,29] },
+    { type: "Proposal", service: "Hood Vent",                   hide: [12,18,20,21,22,23,24,25,29] },
+    { type: "Proposal", service: "Kitchen Cleaning & Hood Vent",hide: [12,18,21,22,23,24,25,29] },
     { type: "Proposal", service: "Staff",                       hide: [12,16,17,18,19,21,22,23,24,25] },
 
     // === HOSPITALITY: KITCHEN & HOODVENT JWO ===
     { type: "Kitchen & Hoodvent JWO", service: "Kitchen Cleaning",             hide: [12,18,20,25] },
-    { type: "Kitchen & Hoodvent JWO", service: "Hood Vent",                    hide: [12,19,20,25] },
-    { type: "Kitchen & Hoodvent JWO", service: "Kitchen Cleaning & Hood Vent", hide: [12,25,20,29] },
+    { type: "Kitchen & Hoodvent JWO", service: "Hood Vent",                    hide: [12,18,20,25] },
+    { type: "Kitchen & Hoodvent JWO", service: "Kitchen Cleaning & Hood Vent", hide: [12,18,20,25,29] },
 
     // === JANITORIAL: CONTRACT (comodín) ===
     { type: "Contract", service: "*", hide: [] },
