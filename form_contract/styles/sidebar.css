@@ -1,0 +1,211 @@
+/**
+ * SIDEBAR STYLES - Formularios Pendientes
+ */
+
+.pending-forms-sidebar {
+    width: var(--sidebar-width);
+    min-width: var(--sidebar-width);
+    background: var(--bg-primary);
+    border-right: 3px solid var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    transition: all var(--transition-cubic);
+    flex-shrink: 0;
+    padding-top: var(--navbar-height);
+}
+
+.pending-forms-sidebar.collapsed {
+    width: 0;
+    min-width: 0;
+    border-right: none;
+}
+
+.sidebar-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    color: var(--text-light);
+    padding: var(--spacing-xl);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow-sm);
+}
+
+.sidebar-header h3 {
+    margin: 0;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+}
+
+.sidebar-toggle {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: var(--text-light);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-base);
+    transition: all var(--transition-base);
+}
+
+.sidebar-toggle:hover {
+    background: rgba(255,255,255,0.3);
+    transform: scale(1.1);
+}
+
+.pending-forms-sidebar.collapsed .sidebar-toggle span {
+    transform: rotate(180deg);
+}
+
+.sidebar-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-md);
+}
+
+.pending-forms-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.form-card {
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-md);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    position: relative;
+}
+
+.form-card:hover {
+    border-color: var(--primary-color);
+    background: var(--bg-tertiary);
+    transform: translateX(5px);
+    box-shadow: var(--shadow-primary);
+}
+
+.form-card.active {
+    border-color: var(--secondary-color);
+    background: #ffe6ec;
+}
+
+.form-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: var(--spacing-sm);
+}
+
+.form-card-id {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    color: var(--primary-color);
+    background: var(--bg-primary);
+    padding: 4px 10px;
+    border-radius: var(--border-radius-full);
+}
+
+.form-card-date {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+}
+
+.form-card-client {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.form-card-service {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.form-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border-color);
+}
+
+.form-card-status {
+    font-size: var(--font-size-xs);
+    padding: 4px 10px;
+    border-radius: var(--border-radius-full);
+    font-weight: var(--font-weight-semibold);
+}
+
+.form-card-status.draft {
+    background: var(--warning-color);
+    color: #92400e;
+}
+
+.form-card-status.sent {
+    background: var(--success-color);
+    color: var(--text-light);
+}
+
+.form-card-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.form-card-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: var(--font-size-lg);
+    padding: 4px;
+    opacity: 0.6;
+    transition: all var(--transition-fast);
+}
+
+.form-card-btn:hover {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.form-card-btn.delete {
+    color: var(--danger-color);
+}
+
+.no-forms-message {
+    text-align: center;
+    padding: var(--spacing-4xl) var(--spacing-xl);
+    color: var(--text-secondary);
+}
+
+.no-forms-message p {
+    margin: 0;
+    font-size: var(--font-size-base);
+}
+
+@media (max-width: 1024px) {
+    .pending-forms-sidebar {
+        width: 100%;
+        min-width: 100%;
+        height: auto;
+        max-height: 40vh;
+        border-right: none;
+        border-bottom: 3px solid var(--primary-color);
+    }
+    
+    .pending-forms-sidebar.collapsed {
+        max-height: 0;
+        border-bottom: none;
+    }
+}

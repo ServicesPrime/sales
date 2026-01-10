@@ -1,0 +1,105 @@
+/**
+ * CALCULATOR STYLES - Panel Lateral
+ */
+
+.calculator-side {
+    flex: 0 0 0%;
+    max-width: 0%;
+    overflow: hidden;
+    background: var(--bg-primary);
+    border-left: 3px solid var(--primary-color);
+    transition: all var(--transition-cubic);
+    position: relative;
+    height: 100vh;
+    padding-top: var(--navbar-height);
+}
+
+.split-screen-wrapper.calculator-visible .calculator-side {
+    flex: 0 0 var(--calculator-width);
+    max-width: var(--calculator-width);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.calculator-container {
+    width: 100%;
+    min-height: calc(100vh - var(--navbar-height));
+    position: relative;
+    padding: var(--spacing-3xl) var(--spacing-xl) var(--spacing-xl);
+}
+
+.calculator-close {
+    position: fixed;
+    top: calc(var(--navbar-height) + var(--spacing-md));
+    right: var(--spacing-3xl);
+    background: var(--danger-color);
+    color: var(--text-light);
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: var(--shadow-danger);
+    transition: all var(--transition-base);
+    z-index: var(--z-sticky);
+}
+
+.calculator-close:hover {
+    background: var(--danger-dark);
+    transform: rotate(90deg) scale(1.1);
+    box-shadow: var(--shadow-lg);
+}
+
+.calculator-iframe {
+    width: 100%;
+    min-height: calc(100vh - var(--navbar-height) - 80px);
+    border: none;
+    display: block;
+    background: var(--bg-primary);
+    border-radius: var(--border-radius-md);
+}
+
+@media (max-width: 1400px) {
+    .split-screen-wrapper.calculator-visible .calculator-side {
+        flex: 0 0 40%;
+        max-width: 40%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .split-screen-wrapper {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+    
+    .calculator-side {
+        border-left: none;
+        border-top: 3px solid var(--primary-color);
+        height: auto;
+        min-height: 50vh;
+        flex: 0 0 auto !important;
+        max-width: 100% !important;
+        padding-top: 0;
+    }
+    
+    .calculator-container {
+        min-height: 50vh;
+        padding: var(--spacing-3xl) var(--spacing-md) var(--spacing-md);
+    }
+    
+    .calculator-close {
+        position: absolute;
+        top: var(--spacing-xl);
+        right: var(--spacing-xl);
+    }
+    
+    .calculator-iframe {
+        min-height: calc(50vh - 80px);
+    }
+}

@@ -1,139 +1,235 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="<?= $lang ?>">
 <?php include 'header.php'; ?>
 <body>
-  <div class="container">
 
-<!-- 🔹 Encabezado -->
-<div class="form-header" id="formHeader"
-     style="text-align:center; margin-bottom:25px; padding:25px 0;
-            background-color:#a30000; border-radius:10px;">
-  <h2 style="font-size:26px; font-weight:700; color:white; margin:0;">
-    📋 Registration Form
-  </h2>
-</div>
+<?php
+// 🌐 LANGUAGE CONTROLLER
+if (isset($_GET["lang"])) {
+    $_SESSION["lang"] = $_GET["lang"];
+}
+$lang = $_SESSION["lang"] ?? "en";
 
-<!-- 🔹 Contenido -->
-<div class="form-content">
-  <form id="main_form" action="enviar_correo.php" method="POST">
+include 'lang.php';
+$t = $translations[$lang];
+?>
 
-    <div class="section-title collapsible">Section 1: Request Information <span class="toggle-icon">▼</span></div>
-    <div class="section-content hidden"><?php include 'form_part1_request.php'; ?></div>
+<!-- 🏠 HOME BUTTON -->
+<a href="../index.php" class="home-btn">🏠 <?= $t["home"] ?></a>
 
-
-    <!-- 🔹 Botón principal -->
-    <div class="form-actions" style="text-align:center; margin-top:25px;">
-      <button type="button" id="btnPreview"
-              style="padding:10px 25px; font-size:16px; font-weight:600;
-                     background:#a30000; color:white; border:none;
-                     border-radius:6px; cursor:pointer;">
-        📧 Enviar
-      </button>
-    </div>
-
-    <!-- 🪟 Modal de previsualización -->
-    <div id="previewModal" style="
-      display:none; position:fixed; top:0; left:0; width:100%; height:100%;
-      background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:9999;
-    ">
-      <div style="
-        background:white; padding:25px; border-radius:10px; max-width:800px; width:90%;
-        box-shadow:0 4px 20px rgba(0,0,0,0.3); overflow-y:auto; max-height:90vh;
-      ">
-        <h2 style="color:#a30000; margin-bottom:10px;">🧾 Previsualización del Formulario</h2>
-        <div id="previewContent" style="text-align:left; font-size:15px; line-height:1.5;"></div>
-        <div style="text-align:center; margin-top:20px;">
-          <button id="confirmSend" style="background:#007bff; color:white; padding:8px 18px; border:none; border-radius:6px;">✅ Confirmar y Enviar</button>
-          <button id="cancelPreview" style="background:#ccc; padding:8px 18px; border:none; border-radius:6px;">❌ Cancelar</button>
-        </div>
-      </div>
-    </div>
-
-  </form>
+<!-- 🌍 LANGUAGE SWITCH -->
+<div class="lang-switch">
+    <a href="?lang=en" class="<?= $lang == 'en' ? 'active' : '' ?>">🇺🇸 EN</a>
+    <a href="?lang=es" class="<?= $lang == 'es' ? 'active' : '' ?>">🇪🇸 ES</a>
 </div>
 
 <style>
-.section-title {
-  background-color: #001f54;
-  color: white;
-  padding: 12px 16px;
-  font-size: 18px;
-  font-weight: bold;
-  border-radius: 8px;
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  user-select: none;
-  transition: background 0.3s ease;
+.home-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: white;
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 99999;
 }
-.section-title:hover { background-color: #003080; }
-.toggle-icon { transition: transform 0.3s ease; }
-.section-title.collapsed .toggle-icon { transform: rotate(-90deg); }
-.section-content {
-  border: 1px solid #ccc;
-  border-top: none;
-  border-radius: 0 0 8px 8px;
-  padding: 15px;
-  background-color: #f9f9f9;
+.lang-switch {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 12px;
+    z-index: 99999;
 }
-.section-content.hidden { display: none; }
+.lang-switch a {
+    background: white;
+    padding: 8px 14px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #333;
+}
+.lang-switch .active {
+    background: #a30000;
+    color: white;
+}
 </style>
 
-<!-- ====================================================== -->
-<!-- Scripts -->
-<!-- ====================================================== -->
+<div class="container">
+
+<!-- 🔹 HEADER -->
+<div class="form-header"
+     style="text-align:center; margin-bottom:25px; padding:25px 0;
+            background:#a30000; border-radius:10px;">
+  <h2 style="color:white; margin:0;">
+    💰 <?= $t["registration_form"] ?>
+  </h2>
+</div>
+
+<div class="form-content">
+<form id="main_form" action="pdf_y_enviar.php" method="POST">
+
+<!-- ================================ -->
+<!-- 🧩 SECTION 1: COMMISSION FORM -->
+<!-- ================================ -->
+
+<div class="section-title collapsible">
+    <?= $t["sec1_title"] ?? "Section 1: Commission Form" ?>
+    <span class="toggle-icon">▼</span>
+</div>
+
+<div class="section-content hidden">
+
+<!-- 1️⃣ Job Number -->
+<div class="question-block">
+  <label class="question-label">1. Job / Work Order Number *</label>
+  <input type="text" name="Job_Number" required>
+</div>
+
+<!-- 2️⃣ Lead Source -->
+<div class="question-block">
+  <label class="question-label">2. Lead Source *</label>
+  <select name="Lead_Source" required>
+    <option value="">-- Select --</option>
+    <option value="facebook">Facebook Ads</option>
+    <option value="google">Google Ads</option>
+    <option value="website">Website / Chat</option>
+    <option value="walkin">Walk-in</option>
+    <option value="sales">Sales Rep Lead</option>
+    <option value="referral">Referral</option>
+    <option value="existing">Existing Client</option>
+  </select>
+</div>
+
+<!-- 3️⃣ Lead Closer -->
+<div class="question-block">
+  <label class="question-label">3. Lead Closer *</label>
+  <select name="Lead_Closer" required>
+    <option value="">Select salesperson</option>
+    <option value="Keny Howe">Keny Howe</option>
+    <option value="Norma Bustos">Norma Bustos</option>
+    <option value="Sandra Hernandez">Sandra Hernandez</option>
+    <option value="Miguel Palma">Miguel Palma</option>
+    <option value="Rafael Perez JR">Rafael Perez JR</option>
+    <option value="Patty Perez">Patty Perez</option>
+  </select>
+</div>
+
+<!-- 4️⃣ Order Paid -->
+<div class="question-block">
+  <label class="question-label">4. Order Paid? *</label>
+  <select name="Order_Paid" required>
+    <option value="">-- Select --</option>
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+    <option value="Partial">Partial</option>
+  </select>
+</div>
+
+<!-- 5️⃣ Net Utility -->
+<div class="question-block">
+  <label class="question-label">5. Net Utility</label>
+  <input type="number"
+         id="Net_Utility"
+         name="Net_Utility"
+         step="0.01"
+         oninput="updateCommissions()">
+</div>
+
+<!-- 6️⃣ Closer Commission -->
+<div class="question-block">
+  <label class="question-label">6. Sales Closer Commission (%)</label>
+
+  <input type="range"
+         id="Closer_Commission_Pct"
+         name="Closer_Commission_Pct"
+         min="0" max="30" step="1"
+         value="0"
+         oninput="updateCommissions()">
+
+  <span id="Closer_Commission_Label">0%</span>
+
+  <input type="number"
+         id="Closer_Commission_Amt"
+         name="Closer_Commission_Amt"
+         readonly
+         step="0.01"
+         placeholder="Commission Amount">
+</div>
+
+</div> <!-- section-content -->
+
+<!-- 🔹 ACTIONS -->
+<div class="form-actions" style="text-align:center; margin-top:25px;">
+  <button type="button" id="btnPreview"
+          style="padding:10px 25px; background:#a30000; color:white;
+                 border:none; border-radius:6px;">
+    📧 <?= $t["send"] ?>
+  </button>
+</div>
+
+<!-- 🔹 PREVIEW MODAL -->
+<div id="previewModal" style="
+  display:none; position:fixed; inset:0;
+  background:rgba(0,0,0,.6);
+  justify-content:center; align-items:center; z-index:9999;">
+  <div style="background:white; padding:25px; border-radius:10px; width:90%; max-width:800px;">
+    <h2 style="color:#a30000;">🧾 <?= $t["preview_form"] ?></h2>
+    <div id="previewContent"></div>
+    <div style="text-align:center; margin-top:20px;">
+      <button id="confirmSend">✅ <?= $t["confirm_send"] ?></button>
+      <button id="cancelPreview">❌ <?= $t["cancel"] ?></button>
+    </div>
+  </div>
+</div>
+
+</form>
+</div>
+</div>
+
+<!-- =============================== -->
+<!-- 🧠 SCRIPTS -->
+<!-- =============================== -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  // 🔹 Comportamiento de secciones plegables
-  const sections = document.querySelectorAll(".section-title");
-  sections.forEach(section => {
-    const content = section.nextElementSibling;
+
+  document.querySelectorAll(".section-title").forEach(title => {
+    const content = title.nextElementSibling;
     content.classList.add("hidden");
-    section.classList.add("collapsed");
-    section.addEventListener("click", () => {
-      section.classList.toggle("collapsed");
+    title.addEventListener("click", () => {
       content.classList.toggle("hidden");
     });
   });
 
-  // 🔹 Abrir previsualización
-  document.getElementById("btnPreview").addEventListener("click", () => {
-    const form = document.getElementById("main_form");
-    const data = new FormData(form);
-
-    let html = "<table style='width:100%; border-collapse:collapse;'>";
-    data.forEach((value, key) => {
-      if (value.trim() !== "")
-        html += `<tr>
-          <td style='font-weight:bold; padding:6px; border-bottom:1px solid #ddd;'>${key.replaceAll("_", " ")}</td>
-          <td style='padding:6px; border-bottom:1px solid #ddd;'>${value}</td>
-        </tr>`;
-    });
+  document.getElementById("btnPreview").onclick = () => {
+    const data = new FormData(document.getElementById("main_form"));
+    let html = "<table>";
+    data.forEach((v,k)=>{ if(v) html+=`<tr><td><b>${k}</b></td><td>${v}</td></tr>`;});
     html += "</table>";
-
     document.getElementById("previewContent").innerHTML = html;
-    document.getElementById("previewModal").style.display = "flex";
-  });
+    document.getElementById("previewModal").style.display="flex";
+  };
 
-  // 🔹 Cerrar modal
-  document.getElementById("cancelPreview").addEventListener("click", () => {
-    document.getElementById("previewModal").style.display = "none";
-  });
+  document.getElementById("cancelPreview").onclick =
+    () => document.getElementById("previewModal").style.display="none";
 
-  // 🔹 Confirmar envío
-  document.getElementById("confirmSend").addEventListener("click", () => {
-    document.getElementById("main_form").submit();
-  });
+  document.getElementById("confirmSend").onclick =
+    () => document.getElementById("main_form").submit();
 });
-</script>
 
-<?php 
-  include 'scripts_request.php';             
-  include 'scripts_operativo.php';     
-  include 'scripts_economico.php';     
-?>
+// 💰 Comisión
+function updateCommissions() {
+    const net = parseFloat(document.getElementById("Net_Utility").value) || 0;
+    const pct = parseFloat(document.getElementById("Closer_Commission_Pct").value) || 0;
+    document.getElementById("Closer_Commission_Label").innerText = pct + "%";
+    document.getElementById("Closer_Commission_Amt").value =
+        (net * pct / 100).toFixed(2);
+}
+</script>
 
 </body>
 </html>

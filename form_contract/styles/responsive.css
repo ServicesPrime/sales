@@ -1,0 +1,219 @@
+/**
+ * RESPONSIVE STYLES - Media Queries
+ */
+
+/* Tablets grande (1024px - 1280px) */
+@media (max-width: 1280px) {
+    :root {
+        --container-max-width: 1200px;
+    }
+    
+    .form-content {
+        padding: var(--spacing-2xl) var(--spacing-3xl);
+    }
+}
+
+/* Tablets (768px - 1024px) */
+@media (max-width: 1024px) {
+    :root {
+        --container-padding: var(--spacing-xl);
+    }
+    
+    .split-screen-wrapper {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+    
+    .pending-forms-sidebar {
+        width: 100%;
+        min-width: 100%;
+        height: auto;
+        max-height: 40vh;
+        border-right: none;
+        border-bottom: 3px solid var(--primary-color);
+    }
+    
+    .form-side {
+        height: auto;
+        min-height: 50vh;
+        flex: 1;
+        max-width: 100% !important;
+    }
+    
+    .container {
+        border-radius: var(--border-radius-lg);
+    }
+}
+
+/* Móviles grande (640px - 768px) */
+@media (max-width: 768px) {
+    :root {
+        --navbar-height: var(--navbar-height-mobile);
+        --container-padding: var(--spacing-lg);
+    }
+    
+    .form-header {
+        padding: var(--spacing-2xl);
+    }
+    
+    .form-header h2 {
+        font-size: var(--font-size-xl);
+    }
+    
+    .form-content {
+        padding: var(--spacing-xl) var(--spacing-lg);
+    }
+    
+    .section-title {
+        padding: var(--spacing-md) var(--spacing-lg);
+        font-size: var(--font-size-base);
+    }
+    
+    .section-content {
+        padding: var(--spacing-lg);
+    }
+    
+    .form-card {
+        padding: var(--spacing-md);
+    }
+    
+    .sidebar-content {
+        padding: var(--spacing-md);
+    }
+}
+
+/* Móviles (480px - 640px) */
+@media (max-width: 640px) {
+    .form-header {
+        padding: var(--spacing-lg);
+    }
+    
+    .form-header h2 {
+        font-size: var(--font-size-lg);
+    }
+    
+    .form-content {
+        padding: var(--spacing-lg) var(--spacing-md);
+    }
+    
+    .section-content {
+        padding: var(--spacing-md);
+    }
+    
+    .question-block {
+        margin-bottom: var(--spacing-lg);
+    }
+}
+
+/* Móviles pequeños (< 480px) */
+@media (max-width: 480px) {
+    :root {
+        --container-padding: var(--spacing-md);
+    }
+    
+    .form-side {
+        padding: var(--spacing-md);
+        padding-top: calc(var(--navbar-height-mobile) + var(--spacing-md));
+    }
+    
+    .container {
+        border-radius: var(--border-radius-md);
+    }
+    
+    .form-header {
+        padding: var(--spacing-md);
+    }
+    
+    .form-header h2 {
+        font-size: var(--font-size-md);
+    }
+    
+    .form-header p {
+        font-size: var(--font-size-sm);
+    }
+    
+    .form-content {
+        padding: var(--spacing-md);
+    }
+    
+    .section-title {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: var(--font-size-sm);
+    }
+    
+    .section-content {
+        padding: var(--spacing-sm);
+    }
+    
+    .form-actions {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+    
+    .btn-draft,
+    .btn-submit {
+        width: 100%;
+        justify-content: center;
+        padding: var(--spacing-md) var(--spacing-xl);
+    }
+}
+
+/* Landscape móviles */
+@media (max-height: 600px) and (orientation: landscape) {
+    .form-side {
+        padding: var(--spacing-lg);
+    }
+    
+    .container {
+        margin-bottom: var(--spacing-xl);
+    }
+}
+
+/* Touch devices */
+@media (hover: none) and (pointer: coarse) {
+    .nav-btn,
+    .form-card,
+    .btn-draft,
+    .btn-submit {
+        min-height: 44px;
+    }
+    
+    .form-input,
+    .form-select {
+        font-size: 16px;
+    }
+}
+
+/* Print */
+@media print {
+    .top-navbar,
+    .pending-forms-sidebar,
+    .calculator-side,
+    .form-actions,
+    .sidebar-toggle,
+    .form-card-actions {
+        display: none !important;
+    }
+    
+    .form-side {
+        padding: 0;
+        background: white;
+    }
+    
+    .container {
+        box-shadow: none;
+        border-radius: 0;
+    }
+    
+    .section-title {
+        background: white !important;
+        color: black !important;
+        page-break-after: avoid;
+    }
+    
+    .section-content {
+        page-break-inside: avoid;
+        border: 1px solid #ccc;
+    }
+}

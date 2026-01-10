@@ -1,0 +1,398 @@
+
+
+==============================================
+2026-01-06 19:17:41 - INICIO SAVE_DRAFT
+==============================================
+✅ Conexión a BD establecida
+Form ID recibido: 6
+Status: draft
+Modo: UPDATE (form_id=6)
+✅ Formulario guardado. Form ID final: 6
+✅ Scope of Work guardado
+
+--- INICIANDO PROCESO DE FOTOS ---
+Verificando $_FILES['photos']...
+isset($_FILES['photos']): SI
+Contenido de $_FILES['photos']:
+Array
+(
+    [name] => Array
+        (
+            [0] => 
+        )
+
+    [full_path] => Array
+        (
+            [0] => 
+        )
+
+    [type] => Array
+        (
+            [0] => 
+        )
+
+    [tmp_name] => Array
+        (
+            [0] => 
+        )
+
+    [error] => Array
+        (
+            [0] => 4
+        )
+
+    [size] => Array
+        (
+            [0] => 0
+        )
+
+)
+
+Primer nombre: 
+empty($_FILES['photos']['name'][0]): SI
+❌ NO SE DETECTARON FOTOS
+Razón: Primer elemento vacío
+
+✅ TRANSACCIÓN CONFIRMADA
+==============================================
+
+
+==============================================
+2026-01-06 19:38:14 - INICIO SAVE_DRAFT
+==============================================
+✅ Conexión a BD establecida
+Form ID recibido: 6
+Status: draft
+Modo: UPDATE (form_id=6)
+✅ Formulario guardado. Form ID final: 6
+✅ Scope of Work guardado
+
+--- INICIANDO PROCESO DE FOTOS ---
+Verificando $_FILES['photos']...
+isset($_FILES['photos']): SI
+Contenido de $_FILES['photos']:
+Array
+(
+    [name] => Array
+        (
+            [0] => 
+        )
+
+    [full_path] => Array
+        (
+            [0] => 
+        )
+
+    [type] => Array
+        (
+            [0] => 
+        )
+
+    [tmp_name] => Array
+        (
+            [0] => 
+        )
+
+    [error] => Array
+        (
+            [0] => 4
+        )
+
+    [size] => Array
+        (
+            [0] => 0
+        )
+
+)
+
+Primer nombre: 
+empty($_FILES['photos']['name'][0]): SI
+❌ NO SE DETECTARON FOTOS
+Razón: Primer elemento vacío
+
+✅ TRANSACCIÓN CONFIRMADA
+==============================================
+
+
+==============================================
+2026-01-06 19:40:09 - INICIO SAVE_DRAFT
+==============================================
+✅ Conexión a BD establecida
+Form ID recibido: 6
+Status: draft
+Modo: UPDATE (form_id=6)
+✅ Formulario guardado. Form ID final: 6
+✅ Scope of Work guardado
+
+--- INICIANDO PROCESO DE FOTOS ---
+Verificando $_FILES['photos']...
+isset($_FILES['photos']): SI
+Contenido de $_FILES['photos']:
+Array
+(
+    [name] => Array
+        (
+            [0] => 
+        )
+
+    [full_path] => Array
+        (
+            [0] => 
+        )
+
+    [type] => Array
+        (
+            [0] => 
+        )
+
+    [tmp_name] => Array
+        (
+            [0] => 
+        )
+
+    [error] => Array
+        (
+            [0] => 4
+        )
+
+    [size] => Array
+        (
+            [0] => 0
+        )
+
+)
+
+Primer nombre: 
+empty($_FILES['photos']['name'][0]): SI
+❌ NO SE DETECTARON FOTOS
+Razón: Primer elemento vacío
+
+✅ TRANSACCIÓN CONFIRMADA
+==============================================
+
+
+==============================================
+2026-01-06 19:40:17 - INICIO SAVE_DRAFT
+==============================================
+✅ Conexión a BD establecida
+Form ID recibido: 6
+Status: draft
+Modo: UPDATE (form_id=6)
+✅ Formulario guardado. Form ID final: 6
+✅ Scope of Work guardado
+
+--- INICIANDO PROCESO DE FOTOS ---
+Verificando $_FILES['photos']...
+isset($_FILES['photos']): SI
+Contenido de $_FILES['photos']:
+Array
+(
+    [name] => Array
+        (
+            [0] => 
+        )
+
+    [full_path] => Array
+        (
+            [0] => 
+        )
+
+    [type] => Array
+        (
+            [0] => 
+        )
+
+    [tmp_name] => Array
+        (
+            [0] => 
+        )
+
+    [error] => Array
+        (
+            [0] => 4
+        )
+
+    [size] => Array
+        (
+            [0] => 0
+        )
+
+)
+
+Primer nombre: 
+empty($_FILES['photos']['name'][0]): SI
+❌ NO SE DETECTARON FOTOS
+Razón: Primer elemento vacío
+
+✅ TRANSACCIÓN CONFIRMADA
+==============================================
+
+
+==============================================
+2026-01-07 19:04:33 - INICIO SAVE_DRAFT
+==============================================
+✅ Conexión a BD establecida
+Form ID recibido: 2
+Status: draft
+Modo: UPDATE (form_id=2)
+✅ Formulario guardado. Form ID final: 2
+
+--- INICIANDO PROCESO DE FOTOS ---
+Verificando $_FILES['photos']...
+isset($_FILES['photos']): SI
+Contenido de $_FILES['photos']:
+Array
+(
+    [name] => Array
+        (
+            [0] => 
+        )
+
+    [full_path] => Array
+        (
+            [0] => 
+        )
+
+    [type] => Array
+        (
+            [0] => 
+        )
+
+    [tmp_name] => Array
+        (
+            [0] => 
+        )
+
+    [error] => Array
+        (
+            [0] => 4
+        )
+
+    [size] => Array
+        (
+            [0] => 0
+        )
+
+)
+
+Primer nombre: 
+empty($_FILES['photos']['name'][0]): SI
+❌ NO SE DETECTARON FOTOS
+Razón: Primer elemento vacío
+
+✅ TRANSACCIÓN CONFIRMADA
+==============================================
+
+
+==============================================
+2026-01-07 19:12:28 - INICIO SAVE_DRAFT
+==============================================
+✅ Conexión a BD establecida
+Form ID recibido: 2
+Status: draft
+Modo: UPDATE (form_id=2)
+✅ Formulario guardado. Form ID final: 2
+
+--- INICIANDO PROCESO DE FOTOS ---
+Verificando $_FILES['photos']...
+isset($_FILES['photos']): SI
+Contenido de $_FILES['photos']:
+Array
+(
+    [name] => Array
+        (
+            [0] => 
+        )
+
+    [full_path] => Array
+        (
+            [0] => 
+        )
+
+    [type] => Array
+        (
+            [0] => 
+        )
+
+    [tmp_name] => Array
+        (
+            [0] => 
+        )
+
+    [error] => Array
+        (
+            [0] => 4
+        )
+
+    [size] => Array
+        (
+            [0] => 0
+        )
+
+)
+
+Primer nombre: 
+empty($_FILES['photos']['name'][0]): SI
+❌ NO SE DETECTARON FOTOS
+Razón: Primer elemento vacío
+
+✅ TRANSACCIÓN CONFIRMADA
+==============================================
+
+
+==============================================
+2026-01-07 19:38:13 - INICIO SAVE_DRAFT
+==============================================
+✅ Conexión a BD establecida
+Form ID recibido: NULL (nuevo)
+Status: draft
+Modo: INSERT (nuevo formulario)
+✅ Formulario guardado. Form ID final: 7
+✅ Scope of Work guardado
+✅ Kitchen/Hood Vent guardados
+
+--- INICIANDO PROCESO DE FOTOS ---
+Verificando $_FILES['photos']...
+isset($_FILES['photos']): SI
+Contenido de $_FILES['photos']:
+Array
+(
+    [name] => Array
+        (
+            [0] => 
+        )
+
+    [full_path] => Array
+        (
+            [0] => 
+        )
+
+    [type] => Array
+        (
+            [0] => 
+        )
+
+    [tmp_name] => Array
+        (
+            [0] => 
+        )
+
+    [error] => Array
+        (
+            [0] => 4
+        )
+
+    [size] => Array
+        (
+            [0] => 0
+        )
+
+)
+
+Primer nombre: 
+empty($_FILES['photos']['name'][0]): SI
+❌ NO SE DETECTARON FOTOS
+Razón: Primer elemento vacío
+
+✅ TRANSACCIÓN CONFIRMADA
+==============================================
